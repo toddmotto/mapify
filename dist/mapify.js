@@ -20,7 +20,9 @@
   function mapObject(item, fn, ctx) {
     var mapped = {};
     for (var prop in item) {
-      mapped[prop] = fn.call((ctx || item), item[prop], prop, item);
+      if (Object.prototype.hasOwnProperty.call(item, prop)) {
+        mapped[prop] = fn.call((ctx || item), item[prop], prop, item);
+      }
     }
     return mapped;
   }
